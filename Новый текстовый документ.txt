@@ -1,0 +1,41 @@
+<?php
+
+// Установить параметры подключения к базе данных
+$host = 'localhost'; // Адрес хоста базы данных
+$username = 'username'; // Имя пользователя базы данных
+$password = 'password'; // Пароль базы данных
+$dbname = 'database_name'; // Имя базы данных
+
+// Подключиться к базе данных
+$conn = mysqli_connect($host, $username, $password, $dbname);
+
+// Проверить соединение на ошибки
+if (!$conn) {
+    die('Ошибка подключения: ' . mysqli_connect_error());
+}
+
+// Определить идентификатор страницы
+$page_id = 1; // Например, получен из GET-запроса
+
+// Составить SQL-запрос для получения информации о странице
+$sql = "SELECT * FROM pages WHERE id = $page_id";
+
+// Выполнить запрос к базе данных
+$result = mysqli_query($conn, $sql);
+
+// Проверить наличие результатов
+if (mysqli_num_rows($result) > 0) {
+    // Получить данные о странице
+    $page = mysqli_fetch_assoc($result);
+    // Вывести заголовок и содержимое страницы
+    echo '<h1>' . $page['title'] . '</h1>';
+    echo '<p>' . $page['content'] . '</p>';
+} else {
+    // Сообщить об ошибке, если страница не найдена
+    echo 'Страница не найдена';
+}
+
+// Закрыть соединение с базой данных
+mysqli_close($conn);
+
+?>

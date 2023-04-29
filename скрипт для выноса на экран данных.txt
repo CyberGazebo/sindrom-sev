@@ -1,0 +1,18 @@
+<?php
+// Подключение к базе данных
+$db_host = "localhost";
+$db_user = "username";
+$db_pass = "password";
+$db_name = "database_name";
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+
+// Извлечение контента из базы данных
+$page_id = 1; // Идентификатор страницы, для которой нужно получить контент
+$sql = "SELECT * FROM pages WHERE id = $page_id";
+$result = mysqli_query($conn, $sql);
+$page = mysqli_fetch_assoc($result);
+
+// Вывод контента на экран
+echo "<h1>" . $page['title'] . "</h1>";
+echo "<p>" . $page['content'] . "</p>";
+?>

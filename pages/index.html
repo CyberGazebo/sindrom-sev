@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Синдрос Северного Сияния - Главная</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<header>
+		<h1>Синдром Северного Сияния</h1>
+		<img id="center_photo" src="logo_group.png">
+		<nav>
+			<ul>
+				<li><a onclick="window.location.href='index.html';">Главная</a></li>
+				<li><a onclick="window.location.href='album.html';">Альбомы</a></li>
+				<li><a onclick="window.location.href='adout.html';">О нас</a></li>
+				<li><a onclick="window.location.href='concerts.html';">Концерты</a></li>
+			</ul>
+		</nav>
+	</header>
+	<script type="text/javascript">
+				function scroll(){
+				// Получаем элемент, который содержит картинки для скролла
+var container = document.getElementById('container');
+
+// Получаем все картинки внутри этого элемента
+var images = container.getElementsByTagName('img');
+
+// Определяем количество картинок
+var numImages = images.length;
+
+// Определяем начальную позицию скролла
+var scrollPosition = 0;
+
+// Определяем, на сколько пикселей будем скроллить
+var scrollIncrement = 200;
+
+// Получаем элементы управления
+var leftButton = document.getElementById('left-button');
+var rightButton = document.getElementById('right-button');
+
+// Функция для скролла вправо
+function scrollRight() {
+  // Проверяем, что можно продолжить скроллить вправо
+  if (scrollPosition + container.clientWidth < container.scrollWidth) {
+    // Увеличиваем текущую позицию скролла
+    scrollPosition += scrollIncrement;
+    // Применяем новую позицию скролла к контейнеру
+    container.scrollLeft = scrollPosition;
+  }  
+}
+
+// Функция для скролла влево
+function scrollLeft() {
+  // Проверяем, что можно продолжить скроллить влево
+  if (scrollPosition > 0) {
+    // Уменьшаем текущую позицию скролла
+    scrollPosition -= scrollIncrement;
+    // Применяем новую позицию скролла к контейнеру
+    container.scrollLeft = scrollPosition;
+  }  
+}
+
+// Добавляем события клика для управления скроллом
+leftButton.addEventListener('click', function() {
+  scrollLeft();
+});
+
+rightButton.addEventListener('click', function() {
+  scrollRight();
+});
+
+// Добавляем событие скролла для контейнера, чтобы обновлять позицию контролов
+container.addEventListener('scroll', function() {
+  var currentPosition = container.scrollLeft;
+  // Активируем или деактивируем кнопки в зависимости от позиции скролла
+  if (currentPosition > 0) {
+    leftButton.disabled = false;
+  } else {
+    leftButton.disabled = true;
+  }
+  if (currentPosition + container.clientWidth < container.scrollWidth) {
+    rightButton.disabled = false;
+  } else {
+    rightButton.disabled = true;
+  }
+});
+}
+			</script>
+	<main>
+		<section>
+			<center><h2>Краткое описание группы</h2></center>
+			<p>Текст описания группы...</p>
+		</section>
+		<section>
+			<center>
+			<h2>Фотографии группы</h2>
+			<img src="Photo1.png" alt="Группа на сцене" onclick="scroll()"><br>
+			<p>На фестивале “Цукиеми фест” 21.01.2022</p>
+			<img src="Photo2.png" alt="Группа в студии"><br>
+			<p>Во время работы на студии</p>
+			<img src="Photo3.png" alt="Группа на фестивале"><br>
+			<p>Во время концерта</p>
+		</center>
+		</section>
+	</main>
+	<footer>
+		<p>&copy; 2023 Синдром Северного Сияния</p>
+	</footer>
+</body>
+</html>
